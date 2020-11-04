@@ -255,9 +255,15 @@ impl ImageFormatter {
             copy_alpha(&shadow, image.as_mut_rgba8().unwrap(), 0, y);
         }
     }
+}
 
+pub trait Format<O> {
+    fn format(&mut self, v: &[Vec<(Style, &str)>], theme: &Theme) -> O;
+}
+
+impl Format<DynamicImage> for ImageFormatter {
     // TODO: use &T instead of &mut T ?
-    pub fn format(&mut self, v: &[Vec<(Style, &str)>], theme: &Theme) -> DynamicImage {
+    fn format(&mut self, v: &[Vec<(Style, &str)>], theme: &Theme) -> DynamicImage {
         if self.line_number {
             self.line_number_chars = ((v.len() as f32).log10() + 1.0).floor() as u32;
         } else {
@@ -306,3 +312,4 @@ impl ImageFormatter {
         }
     }
 }
+

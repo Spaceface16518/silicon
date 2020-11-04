@@ -4,6 +4,7 @@ extern crate log;
 extern crate anyhow;
 
 use crate::config::Config;
+use crate::formatter::Format;
 use crate::utils::*;
 use anyhow::Error;
 use image::DynamicImage;
