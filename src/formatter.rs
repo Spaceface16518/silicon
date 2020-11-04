@@ -153,6 +153,31 @@ struct Drawable {
     drawables: Vec<(u32, u32, Color, FontStyle, String)>,
 }
 
+pub trait OutputFormat {
+    type Output;
+
+    fn format(&self, formatter: ImageFormatter, v: &[Vec<(Style, &str)>], theme: &Theme) -> Self::Output;
+}
+
+pub struct DynamicImageFormat;
+
+impl OutputFormat for DynamicImageFormat {
+    type Output = DynamicImage;
+
+    fn format(&self, formatter: ImageFormatter, v: &[Vec<(Style, &str)>], theme: &Theme) -> Self::Output {
+        todo!()
+    }
+}
+
+pub struct SVGFormat;
+
+impl OutputFormat for SVGFormat {
+    type Output = ();
+     fn format(&self, formatter: ImageFormatter, v: &[Vec<(Style, &str)>], theme: &Theme) -> Self::Output {
+         todo!()
+     }
+}
+
 impl ImageFormatter {
     /// calculate the height of a line
     fn get_line_height(&self) -> u32 {
